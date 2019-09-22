@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: com.wonderkiln:blurkit:1.0.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ac151b06e2485f86d30ebee671037bf4/blurkit-1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ac151b06e2485f86d30ebee671037bf4/blurkit-1.0.0/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.wonderkiln/blurkit/1.0.0/a5cc66a9ff9ce835fe62955087b5bafb45781e61/blurkit-1.0.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.wonderkiln/blurkit/1.0.0/7ac65c48cd7521f0d8d9d89d588305295be6a136/blurkit-1.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
