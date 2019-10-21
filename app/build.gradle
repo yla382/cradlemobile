@@ -77,6 +77,11 @@ dependencies {
 
     // Volley (networking)
     implementation 'com.android.volley:volley:1.1.1'
+
+    // Jackson
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.9.8'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.9.8'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.8'
 }
 
 // TensorFlow Lite: select only the ABI's we (likely) need

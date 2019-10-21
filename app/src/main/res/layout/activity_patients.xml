@@ -32,7 +32,16 @@
 
             </android.support.design.widget.AppBarLayout>
 
-            <include layout="@layout/content_patients" />
+            <include
+                android:id="@+id/include"
+                layout="@layout/content_patients" />
+
+            <ListView
+                android:id="@+id/fts"
+                android:layout_width="match_parent"
+                android:layout_height="619dp"
+                app:layout_anchor="@+id/include"
+                app:layout_anchorGravity="center" />
 
         </android.support.design.widget.CoordinatorLayout>
 

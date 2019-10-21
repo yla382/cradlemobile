@@ -5,15 +5,27 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.cradletrial.cradlevhtapp.R;
 import com.cradletrial.cradlevhtapp.dagger.MyApp;
+import com.cradletrial.cradlevhtapp.model.Patient;
 import com.cradletrial.cradlevhtapp.model.Reading;
 import com.cradletrial.cradlevhtapp.model.ReadingManager;
 import com.cradletrial.cradlevhtapp.model.Settings;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.threeten.bp.ZonedDateTime;
 import org.threeten.bp.temporal.ChronoUnit;
 
@@ -59,6 +71,9 @@ public class PatientsActivity extends TabActivityBase {
         // bottom bar nav in base class
         setupBottomBarNavigation();
 
+        // list view with patients
+        setupListView();
+
         // buttons
         setupAddSampleDataButton();
         setupClearDBButton();
@@ -67,6 +82,54 @@ public class PatientsActivity extends TabActivityBase {
         setupSettingsClear();
     }
 
+    private void setupListView() {
+        getPatientsFromServer();
+
+    }
+
+    private void getPatientsFromServer() {
+        RequestQueue mRequestQueue;
+        String url = "http://cmpt373.csil.sfu.ca:8081/android/patients";
+        String TAG = PatientsActivity.class.getName();
+
+        mRequestQueue = Volley.newRequestQueue(this);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i(TAG, "Response: " + response);
+                ListView listView = (ListView) findViewById(R.id.fts);
+
+
+                try {
+
+                    JSONArray jsonArray = new JSONArray(response);
+                    Log.d("Response: ", jsonArray.toString());
+
+                    List<Patient> patientList = new ArrayList<>();
+                    for (int i = 0; i < jsonArray.length(); i++) {
+
+                        ObjectMapper objectMapper = new ObjectMapper();
+                        Patient patient = objectMapper.readValue(jsonArray.get(i).toString(), Patient.class);
+                        Log.d("For loop: ", patient.toString());
+
+                    }
+                } catch (Throwable tx) {
+                    Log.e("PatientsActivity: ", "Could not parse malformed JSON: \"" + response + "\"");
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i(TAG, "Error: " + error.toString());
+            }
+        });
+
+        // Fires the request
+        mRequestQueue.add(stringRequest);
+
+
+    }
 
 
     private void setupAddSampleDataButton() {
