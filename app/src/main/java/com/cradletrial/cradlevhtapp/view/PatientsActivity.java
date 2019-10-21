@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ import com.cradletrial.cradlevhtapp.model.Settings;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.threeten.bp.ZonedDateTime;
 import org.threeten.bp.temporal.ChronoUnit;
@@ -72,7 +74,7 @@ public class PatientsActivity extends TabActivityBase {
         setupBottomBarNavigation();
 
         // list view with patients
-        setupListView();
+        getPatientsFromServer();
 
         // buttons
         setupAddSampleDataButton();
@@ -80,11 +82,6 @@ public class PatientsActivity extends TabActivityBase {
         setupPretendToUnUploadToServer();
         setupSettingsAddFake();
         setupSettingsClear();
-    }
-
-    private void setupListView() {
-        getPatientsFromServer();
-
     }
 
     private void getPatientsFromServer() {
@@ -98,23 +95,15 @@ public class PatientsActivity extends TabActivityBase {
             @Override
             public void onResponse(String response) {
                 Log.i(TAG, "Response: " + response);
-                ListView listView = (ListView) findViewById(R.id.fts);
-
+                ListView listView = findViewById(R.id.fts);
 
                 try {
-
                     JSONArray jsonArray = new JSONArray(response);
                     Log.d("Response: ", jsonArray.toString());
 
-                    List<Patient> patientList = new ArrayList<>();
-                    for (int i = 0; i < jsonArray.length(); i++) {
-
-                        ObjectMapper objectMapper = new ObjectMapper();
-                        Patient patient = objectMapper.readValue(jsonArray.get(i).toString(), Patient.class);
-                        Log.d("For loop: ", patient.toString());
-
-                    }
-                } catch (Throwable tx) {
+                    setupListView(listView, jsonArray);
+                }
+                catch (Throwable tx) {
                     Log.e("PatientsActivity: ", "Could not parse malformed JSON: \"" + response + "\"");
                 }
             }
@@ -131,6 +120,21 @@ public class PatientsActivity extends TabActivityBase {
 
     }
 
+    private void setupListView(ListView listView, JSONArray jsonArray) throws java.io.IOException, JSONException {
+        List<String> stringList = new ArrayList<>();
+        for (int i = 0; i < jsonArray.length(); i++) {
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            Patient patient = objectMapper.readValue(jsonArray.get(i).toString(), Patient.class);
+            Log.d("For loop: ", patient.toString());
+
+            stringList.add(patient.getFirstName() + " " + patient.getLastName() + " " +
+                    patient.getAgeYears());
+        }
+
+        final ArrayAdapter adapter = new ArrayAdapter<>(PatientsActivity.this, android.R.layout.simple_list_item_1, stringList);
+        listView.setAdapter(adapter);
+    }
 
     private void setupAddSampleDataButton() {
         Button btn = findViewById(R.id.btnAddSampleData);

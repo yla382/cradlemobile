@@ -39,7 +39,7 @@
             <ListView
                 android:id="@+id/fts"
                 android:layout_width="match_parent"
-                android:layout_height="619dp"
+                android:layout_height="481dp"
                 app:layout_anchor="@+id/include"
                 app:layout_anchorGravity="center" />
 

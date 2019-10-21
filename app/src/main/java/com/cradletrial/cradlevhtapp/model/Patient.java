@@ -80,7 +80,13 @@ public class Patient {
 
     @Override
     public String toString() {
-        return this.getFirstName();
+        return "Patient{" +
+                "patientId=" + patientId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", ageYears=" + ageYears +
+                ", country='" + country + '\'' +
+                ", location='" + location + '\'' +
+                '}';
     }
-
 }
