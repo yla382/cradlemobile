@@ -2,6 +2,7 @@ package com.cradletrial.cradlevhtapp.model;
 
 public class Patient {
     private Integer patientId;
+    private String attestationID;
     private String firstName = null;
     private String lastName = null;
     private Integer ageYears = null;
@@ -9,11 +10,13 @@ public class Patient {
     private String location = null;
 
 
+
     public Patient() {
     }
 
-    public Patient(Integer patientId, String firstName, String lastName, String country, String location) {
+    public Patient(Integer patientId, String attestationID, String firstName, String lastName, String country, String location) {
         this.patientId = patientId;
+        this.attestationID = attestationID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.country = country;
@@ -26,8 +29,13 @@ public class Patient {
         this.ageYears = ageYears;
     }
 
+
     public Integer getPatientId() {
         return patientId;
+    }
+
+    public String getAttestationID() {
+        return attestationID;
     }
 
     public String getCountry() {
@@ -56,6 +64,10 @@ public class Patient {
 
     public void setPatientId(int patientId) {
         this.patientId = patientId;
+    }
+
+    public void setAttestationID(String attestationID) {
+        this.attestationID = attestationID;
     }
 
     public void setCountry(String country) {

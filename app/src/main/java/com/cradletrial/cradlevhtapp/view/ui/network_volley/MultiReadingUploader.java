@@ -24,6 +24,7 @@ import java.net.UnknownHostException;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.ZipFile;
 
 /**
  * Handle uploading multiple readings to the server.
@@ -167,7 +168,9 @@ public class MultiReadingUploader {
                     settings.getServerUrl(),
                     settings.getServerUserName(),
                     settings.getServerPassword());
-            uploader.doUpload(encryptedZip.getAbsolutePath(), getSuccessCallback(), getErrorCallback());
+//            uploader.doUpload(encryptedZip.getAbsolutePath(), getSuccessCallback(), getErrorCallback());
+            uploader.doUpload(zipFile.getAbsolutePath(), getSuccessCallback(), getErrorCallback());
+
 
         } catch (IOException | GeneralSecurityException ex) {
             Log.e(TAG, "Exception with encrypting and transmitting data!", ex);

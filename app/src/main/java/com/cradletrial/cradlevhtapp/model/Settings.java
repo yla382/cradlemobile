@@ -19,7 +19,7 @@ public class Settings {
     // todo: remove temporary upload defaults once 2D bar-code reading in place for settings.
     private static String LINEFEED = "\r\n";
 //    public static String DEFAULT_SERVER_URL = "https://cmpt276-1177-bf.cmpt.sfu.ca/unhcr/upload.php";
-    public static String DEFAULT_SERVER_URL = "https://bfraser-srv01.cmpt.sfu.ca/unhcr/upload.php";
+    public static String DEFAULT_SERVER_URL = "http://cmpt373.csil.sfu.ca:8081/android/upload";
     public static String DEFAULT_SERVER_USERNAME = "user";
     public static String DEFAULT_SERVER_USERPASSWORD = "just4testing";
     public static String DEFAULT_SERVER_RSA = "-----BEGIN PUBLIC KEY-----                                      " + LINEFEED +
