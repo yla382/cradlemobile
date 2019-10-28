@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.cradletrial.cradlevhtapp.R;
+import com.cradletrial.cradlevhtapp.model.GestationalAgeUnit;
 import com.cradletrial.cradlevhtapp.model.Reading;
 import com.cradletrial.cradlevhtapp.model.Settings;
 import com.cradletrial.cradlevhtapp.utilitiles.Util;
@@ -191,13 +192,13 @@ public class PatientInfoFragment extends BaseFragment {
 
         switch (spin.getSelectedItemPosition()) {
             case GA_UNIT_INDEX_NONE:
-                currentReading.gestationalAgeUnit = Reading.GestationalAgeUnit.GESTATIONAL_AGE_UNITS_NONE;
+                currentReading.gestationalAgeUnit = GestationalAgeUnit.GESTATIONAL_AGE_UNITS_NONE;
                 break;
             case GA_UNIT_INDEX_WEEKS:
-                currentReading.gestationalAgeUnit = Reading.GestationalAgeUnit.GESTATIONAL_AGE_UNITS_WEEKS;
+                currentReading.gestationalAgeUnit = GestationalAgeUnit.GESTATIONAL_AGE_UNITS_WEEKS;
                 break;
             case GA_UNIT_INDEX_MOTHS:
-                currentReading.gestationalAgeUnit = Reading.GestationalAgeUnit.GESTATIONAL_AGE_UNITS_MONTHS;
+                currentReading.gestationalAgeUnit = GestationalAgeUnit.GESTATIONAL_AGE_UNITS_MONTHS;
                 break;
             default:
                 Util.ensure(false);

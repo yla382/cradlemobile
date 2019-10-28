@@ -35,12 +35,6 @@ public class Reading {
     /**
      * Types
      */
-    public enum GestationalAgeUnit {
-        GESTATIONAL_AGE_UNITS_NONE,
-        GESTATIONAL_AGE_UNITS_WEEKS,
-        GESTATIONAL_AGE_UNITS_MONTHS,
-//        GESTATIONAL_AGE_UNITS_LASTMENSTRUALPERIOD,
-    }
     public class WeeksAndDays {
         public final int weeks;
         public final int days;

@@ -19,6 +19,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cradletrial.cradlevhtapp.R;
 import com.cradletrial.cradlevhtapp.dagger.MyApp;
+import com.cradletrial.cradlevhtapp.model.GestationalAgeUnit;
 import com.cradletrial.cradlevhtapp.model.Patient;
 import com.cradletrial.cradlevhtapp.model.Reading;
 import com.cradletrial.cradlevhtapp.model.ReadingManager;
@@ -171,15 +172,15 @@ public class PatientsActivity extends TabActivityBase {
                 }
 
                 if (i % 3 == 0) {
-                    r.gestationalAgeUnit = Reading.GestationalAgeUnit.GESTATIONAL_AGE_UNITS_WEEKS;
+                    r.gestationalAgeUnit = GestationalAgeUnit.GESTATIONAL_AGE_UNITS_WEEKS;
                     r.gestationalAgeValue = "" + (i % 45);
                 }
                 if (i % 3 == 1) {
-                    r.gestationalAgeUnit = Reading.GestationalAgeUnit.GESTATIONAL_AGE_UNITS_MONTHS;
+                    r.gestationalAgeUnit = GestationalAgeUnit.GESTATIONAL_AGE_UNITS_MONTHS;
                     r.gestationalAgeValue = "" + (i % 11);
                 }
                 if (i % 3 == 2) {
-                    r.gestationalAgeUnit = Reading.GestationalAgeUnit.GESTATIONAL_AGE_UNITS_NONE;
+                    r.gestationalAgeUnit = GestationalAgeUnit.GESTATIONAL_AGE_UNITS_NONE;
                 }
 
 

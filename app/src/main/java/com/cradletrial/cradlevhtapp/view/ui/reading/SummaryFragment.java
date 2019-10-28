@@ -19,6 +19,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.cradletrial.cradlevhtapp.R;
+import com.cradletrial.cradlevhtapp.model.GestationalAgeUnit;
 import com.cradletrial.cradlevhtapp.model.Reading;
 import com.cradletrial.cradlevhtapp.model.ReadingAnalysis;
 import com.cradletrial.cradlevhtapp.model.ReadingRetestAnalysis;
@@ -119,7 +120,7 @@ public class SummaryFragment extends BaseFragment {
         // gestational age
         String ga;
         Reading.WeeksAndDays gaStruct = currentReading.getGestationalAgeInWeeksAndDays();
-        if (currentReading.gestationalAgeUnit == Reading.GestationalAgeUnit.GESTATIONAL_AGE_UNITS_NONE) {
+        if (currentReading.gestationalAgeUnit == GestationalAgeUnit.GESTATIONAL_AGE_UNITS_NONE) {
             ga = getString(R.string.reading_gestational_age_not_pregnant);
         } else if (gaStruct == null) {
             ga = "No gestational age";

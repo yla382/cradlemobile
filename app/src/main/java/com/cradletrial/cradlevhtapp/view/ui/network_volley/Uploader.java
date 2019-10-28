@@ -66,8 +66,6 @@ public class Uploader {
         // add to volley queue
         RequestQueue queue = Volley.newRequestQueue(MyApp.getInstance());
         queue.add(multipartRequest);
-
-
     }
 
     private void buildTextPart(DataOutputStream dataOutputStream, String parameterName, String parameterValue) throws IOException {
