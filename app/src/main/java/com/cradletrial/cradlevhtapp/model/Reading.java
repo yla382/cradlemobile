@@ -54,7 +54,8 @@ public class Reading {
 
     // patient info
     public String patientId;
-    public String patientName;
+    public String patientFirstName;
+    public String patientLastName;
     public Integer ageYears;
     public List<String> symptoms = new ArrayList<>();
     public GestationalAgeUnit gestationalAgeUnit;
@@ -111,7 +112,8 @@ public class Reading {
         // copy fields
         Reading r = Reading.makeNewReading(now);
         r.patientId = source.patientId;
-        r.patientName = source.patientName;
+        r.patientFirstName = source.patientFirstName;
+        r.patientLastName = source.patientLastName;
         r.ageYears = source.ageYears;
         r.symptoms = new ArrayList<>();
         r.symptoms.addAll(source.symptoms);
@@ -252,7 +254,8 @@ public class Reading {
     public boolean isMissingRequiredData() {
         boolean missing = false;
         missing |= patientId == null;
-        missing |= patientName == null;
+        missing |= patientFirstName == null;
+        missing |= patientLastName == null;
         missing |= ageYears == null;
         missing |= gestationalAgeUnit == null;
         missing |= (gestationalAgeValue == null

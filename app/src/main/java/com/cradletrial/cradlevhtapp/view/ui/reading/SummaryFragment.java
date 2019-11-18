@@ -104,10 +104,16 @@ public class SummaryFragment extends BaseFragment {
         String errorMessage = "";
 
         // name
-        String name = currentReading.patientName;
-        if (Util.isNullOrEmpty(name)) {
-            name = "No name";
-            errorMessage += "- patient initials" + "\n";
+        String firstName = currentReading.patientFirstName;
+        if (Util.isNullOrEmpty(firstName)) {
+            firstName = "No first name";
+            errorMessage += "- patient first name" + "\n";
+        }
+
+        String lastName = currentReading.patientLastName;
+        if (Util.isNullOrEmpty(lastName)) {
+            lastName = "No first name";
+            errorMessage += "- patient last name" + "\n";
         }
 
         // age
@@ -131,7 +137,7 @@ public class SummaryFragment extends BaseFragment {
 
         // display "name, age @ ga"
         tv = getView().findViewById(R.id.txtPatientHeader);
-        tv.setText( getString(R.string.reading_name_age_ga, name, age, ga));
+        tv.setText( getString(R.string.reading_name_age_ga, firstName, lastName, age, ga));
 
         // patient id
         tv = getView().findViewById(R.id.txtPatientId);

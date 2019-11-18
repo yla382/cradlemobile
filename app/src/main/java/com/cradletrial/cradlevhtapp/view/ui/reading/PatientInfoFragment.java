@@ -94,9 +94,12 @@ public class PatientInfoFragment extends BaseFragment {
         et = mView.findViewById(R.id.etPatientId);
         et.setText(currentReading.patientId);
 
-        // initials
-        et = mView.findViewById(R.id.etPatientName);
-        et.setText(currentReading.patientName);
+        // first name
+        et = mView.findViewById(R.id.etPatientFirstName);
+        et.setText(currentReading.patientFirstName);
+
+        et = mView.findViewById(R.id.etPatientLastName);
+        et.setText(currentReading.patientLastName);
 
         // age
         et = mView.findViewById(R.id.etPatientAge);
@@ -112,9 +115,13 @@ public class PatientInfoFragment extends BaseFragment {
         et = mView.findViewById(R.id.etPatientId);
         currentReading.patientId = et.getText().toString();
 
-        // initials
-        et = mView.findViewById(R.id.etPatientName);
-        currentReading.patientName = et.getText().toString();
+        // First name
+        et = mView.findViewById(R.id.etPatientFirstName);
+        currentReading.patientFirstName = et.getText().toString();
+
+        // Last Name
+        et = mView.findViewById(R.id.etPatientLastName);
+        currentReading.patientLastName = et.getText().toString();
 
         // age
         et = mView.findViewById(R.id.etPatientAge);
