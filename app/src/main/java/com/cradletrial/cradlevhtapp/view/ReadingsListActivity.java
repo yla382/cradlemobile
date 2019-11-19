@@ -169,8 +169,4 @@ public class ReadingsListActivity extends TabActivityBase {
             wv.setVisibility(View.INVISIBLE);
         }
     }
-
-
-
-
 }

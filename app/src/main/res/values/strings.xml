@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">CRADLE VSA Support</string>
     <string name="action_settings">Settings</string>
 
@@ -187,6 +187,85 @@
         3QIDAQAB                                                        \n
         -----END PUBLIC KEY-----
     </string>
+
+    <string name="group_name">Mango</string>
+    <string name="api_key" tools:ignore="TypographyDashes">554A5363-0A29-4A73-9821-47B1B7E392DB3</string>
+
+    <string name="api_key_working">This is %1$s\'s API key: %2$s</string>
+
+    <string name="post_log_in_message">User %1$s has logged in!</string>
+    <string name="token_set">Token has been set as %1$s.</string>
+
+    <string name="user_not_logged_in">You must first login</string>
+
+    <string name="user_name_textView_content">Name: %1$s</string>
+    <string name="user_email_textView_content">Email: %1$s</string>
+
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email_address">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="login_user">Already have an account? <b> Login here</b></string>
+    <string name="default_name">No user</string>
+    <string name="login_button">Login</string>
+    <string name="create_user_text">Don\'t have an account? <b> Create one here</b></string>
+    <string name="create_user_button">Create Account</string>
+    <string name="logout_button">Logout</string>
+
+    <string name="empty_error_toast">Email and password cannot be empty</string>
+
+    <string name="random_long">12345</string>
+
+    <string name="save_id">Save - id</string>
+    <string name="save_first_name">Save - firstName</string>
+    <string name="save_last_name">Save - lastName</string>
+    <string name="save_user_email">Save - email</string>
+    <string name="save_user_password">Save - password</string>
+    <string name="save_phone_number">Save - phoneNumber</string>
+    <string name="save_roles">Save - roles</string>
+    <string name="save_token">Save - token</string>
+    <string name="login_subtitle">Login</string>
+    <string name="new_user_subtitle">New User</string>
+    <string name="main_menu_subtitle">Main Menu</string>
+
+    <string name="welcome_message">Welcome %1$s</string>
+    <string name="user_removed_message">%1$s has been removed</string>
+
+    <string name="group_name_2">Group Name:</string>
+    <string name="result_ok">result ok</string>
+    <string name="cancelled">cancelled</string>
+    <string name="empty" />
+    <string name="login_btn_clicked">loginBtn button clicked</string>
+    <string name="now_have_token"><![CDATA[--> NOW HAVE TOKEN:]]></string>
+    <string name="check_inputs">Check inputs</string>
+    <string name="called_for_monitors">Called for monitors</string>
+    <string name="used_adpater">Used adapter</string>
+    <string name="user_info">user Info</string>
+    <string name="exception">Exception: %s</string>
+    <string name="choose_group_name">Choose your Group Name!</string>
+    <string name="permission_granted_message">Yes!!! Permission granted.</string>
+    <string name="permission_denied_message">Must allow Fine Location Access to utilize features</string>
+    <string name="location_null">Current location is null. Using defaults.</string>
+    <string name="specify_meet_and_destination_points">You must specify a meeting point and a destination point</string>
+    <string name="group_name_dialog">GroupNameDialog</string>
+    <string name="meeting_point_title">Meeting Point</string>
+    <string name="destination_title">Destination</string>
+    <string name="map_btn_content">Map</string>
+
+    <string name="email_error_text"><b>Email must be in format example@example.com</b></string>
+
+    <string name="password_error_text"><b>Your password must meet the following criteria:\n
+                <li> Must be at least eight (8) characters long\n</li>
+                <li> Must contain both uppercase and lowercase letters\n</li>
+                <li> Must contain a number\n</li>
+</b></string>
+
+
+    <string name="help">Help</string>
+    <string name="first_specifiy_the_destination_and_meeting_point_of_the_group_you_can_specifiy_the_destination_using_the_place_picker_by_clicking_the_map_button_and_choosing_an_area_near_you_you_can_also_pick_the_destination_and_meeting_point_by_manually_entering_the_address_into_the_search_bar_be_as_specific_as_possible_once_both_the_meeting_point_and_destination_have_a_marker_on_the_map_click_the_plus_button_to_name_your_group">First, specifiy the destination and meeting point of the group. You can specifiy the destination using the place picker by clicking the map button and choosing an area near you. You can also pick the destination and meeting point by manually entering the address into the search bar (be as specific as possible!). Once both the meeting point and destination have a marker on the map, click the plus button to name your group.</string>
+    <string name="how_to_use_the_app">How to use the app:</string>
+
 
 
 
