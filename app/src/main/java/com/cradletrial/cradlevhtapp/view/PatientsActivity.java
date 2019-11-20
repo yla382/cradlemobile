@@ -147,7 +147,8 @@ public class PatientsActivity extends TabActivityBase {
             for (int i = 0; i < 30; i++ ) {
                 int makeNeg = (i % 2 == 0) ? 1 : -1;
                 Reading r = new Reading();
-                r.patientName = "P" + (char)('A' + i);
+                r.patientFirstName = "P" + (char)('A' + i);
+                r.patientLastName = "P" + (char)('A' + i);
                 r.patientId = String.valueOf(48300027400L + i + ((i * new Random().nextLong() % 10000000L)* 1000));
                 r.ageYears = 20 + i;
                 r.dateTimeTaken = ZonedDateTime.now().minus(timeDelta, ChronoUnit.MINUTES);

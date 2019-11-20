@@ -388,7 +388,8 @@ public class ReferralDialogFragment extends DialogFragment {
 
         // patient
         String patient = getString(R.string.sms_message_patient,
-                currentReading.patientName,
+                currentReading.patientFirstName,
+                currentReading.patientLastName,
                 currentReading.patientId
         );
         Reading.WeeksAndDays ga = currentReading.getGestationalAgeInWeeksAndDays();

@@ -79,7 +79,7 @@
 
 
     <!-- Reading Descriptions -->
-    <string name="reading_name_and_id">%1$s (#%2$s)</string>
+    <string name="reading_name_and_id">%1$s %2$s (#%3$s)</string>
     <string name="reading_recheck_vitals_now">Recheck vitals now</string>
     <string name="reading_recheck_vitals_in_one_minute">Recheck vitals in 1 minute</string>
     <string name="reading_recheck_vitals_in_minutes">Recheck vitals in %1$d minutes</string>
@@ -88,7 +88,7 @@
     <string name="reading_referred_to_health_centre_unknown">Referred to a health centre</string>
 
     <!-- Readings Details -->
-    <string name="reading_name_age_ga">%1$s, %2$dy @ %3$s</string>
+    <string name="reading_name_age_ga">%1$s, %2$s, %3$dy @ %4$s</string>
     <string name="reading_gestational_age_in_weeks_and_days">%1$dw +%2$dd</string>
     <string name="reading_gestational_age_not_pregnant">Not pregnant</string>
     <string name="reading_time_summary">%1$s: %2$s</string>
@@ -138,7 +138,7 @@
     <!-- SMS Text Message Referral - SMS content-->
     <!-- NOTE: May not want to translate, as sent to doctors -->
     <string name="sms_message_header">CRADLE VSA REFERRAL:</string>
-    <string name="sms_message_patient">Patient %1$s (#%2$s)</string>
+    <string name="sms_message_patient">Patient %1$s (%2$s) (#%3$s)</string>
     <string name="sms_message_patient_age_pregnant">   Age %1$dy, GA %2$dw+%3$dd</string>
     <string name="sms_message_patient_age_not_pregnant">   Age %1$dy, Not pregnant</string>
     <string name="sms_message_reading_date">Reading @ %1$s</string>
