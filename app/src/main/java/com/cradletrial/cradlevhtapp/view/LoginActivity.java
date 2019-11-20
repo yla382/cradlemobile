@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cradletrial.cradlevhtapp.R;
-import com.cradletrial.cradlevhtapp.UserRetrofitApi;
+import com.cradletrial.cradlevhtapp.model.UserRetrofitApi;
 import com.cradletrial.cradlevhtapp.model.User;
 import com.cradletrial.cradlevhtapp.model.UserInfoStorage;
 import retrofit2.Call;
@@ -22,7 +22,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
-import retrofit2.http.HTTP;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -69,35 +68,32 @@ public class LoginActivity extends AppCompatActivity {
         switch (requestCode){
 
             case CREATE_USER:
-
                 if(resultCode == Activity.RESULT_OK){
                     Toast.makeText(LoginActivity.this, "Account created", Toast.LENGTH_SHORT).show();
-                    updateInputs(getString(R.string.result_ok));
+                    updateInputs();
+                    goToReadingList();
                 } else {
-                    updateInputs(getString(R.string.cancelled));
+                    updateInputs();
                 }
 
             case REMOVE_USER_INFO_ON_LOG_OUT:
 
                 if(resultCode == Activity.RESULT_OK){
-
                     userInfoStorage.removeUserInfo();
-                    updateInputs(getString(R.string.result_ok));
+//                    updateInputs(getString(R.string.result_ok));
                 }
         }
     }
 
-    private void updateInputs(String message) {
+    private void updateInputs() {
 
-        Log.i(TAG, message);
         EditText emailEditText = findViewById(R.id.email);
+        EditText passwordEditText = findViewById(R.id.password);
 
-        if(User.getCurrentUser().getEmail() != null) {
-            emailEditText.setText(User.getCurrentUser().getEmail());
-        }
-        else{
-            emailEditText.setText("");
-        }
+        emailEditText.setText("");
+        emailEditText.findFocus();
+        passwordEditText.setText("");
+
     }
 
     private void setupLoginButton(){
@@ -206,5 +202,10 @@ public class LoginActivity extends AppCompatActivity {
         return new Intent(context, LoginActivity.class);
     }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        updateInputs();
+    }
 }
 

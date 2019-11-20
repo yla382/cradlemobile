@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.cradletrial.cradlevhtapp.R;
-import com.cradletrial.cradlevhtapp.UserRetrofitApi;
+import com.cradletrial.cradlevhtapp.model.UserRetrofitApi;
 import com.cradletrial.cradlevhtapp.model.User;
 import com.cradletrial.cradlevhtapp.view.validation.ValidateEmail;
 import com.cradletrial.cradlevhtapp.view.validation.ValidateUserInputs;
@@ -78,9 +78,6 @@ public class NewUserActivity extends AppCompatActivity {
 
     private void executeUserCreate() {
 
-//        Call<User> caller = ProxyManager.getProxy(NewUserActivity.this).createUser(User.getCurrentUser());
-//        ProxyBuilder.callProxy(NewUserActivity.this, caller, this::onUserCreated);
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:8080/")
                 .addConverterFactory(JacksonConverterFactory.create())
@@ -98,7 +95,7 @@ public class NewUserActivity extends AppCompatActivity {
                     return;
                 }
 
-                onUserCreated(response.body());
+                onUserCreated();
             }
 
             @Override
@@ -110,7 +107,7 @@ public class NewUserActivity extends AppCompatActivity {
 
     }
 
-    private void onUserCreated(User user) {
+    private void onUserCreated() {
 
         setResult(Activity.RESULT_OK);
         finish();
