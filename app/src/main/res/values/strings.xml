@@ -206,6 +206,7 @@
     <string name="email_address">Email</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="phone_number">Phone Number</string>
     <string name="login_user">Already have an account? <b> Login here</b></string>
     <string name="default_name">No user</string>
     <string name="login_button">Login</string>
@@ -239,34 +240,15 @@
     <string name="login_btn_clicked">loginBtn button clicked</string>
     <string name="now_have_token"><![CDATA[--> NOW HAVE TOKEN:]]></string>
     <string name="check_inputs">Check inputs</string>
-    <string name="called_for_monitors">Called for monitors</string>
-    <string name="used_adpater">Used adapter</string>
-    <string name="user_info">user Info</string>
-    <string name="exception">Exception: %s</string>
-    <string name="choose_group_name">Choose your Group Name!</string>
-    <string name="permission_granted_message">Yes!!! Permission granted.</string>
-    <string name="permission_denied_message">Must allow Fine Location Access to utilize features</string>
-    <string name="location_null">Current location is null. Using defaults.</string>
-    <string name="specify_meet_and_destination_points">You must specify a meeting point and a destination point</string>
-    <string name="group_name_dialog">GroupNameDialog</string>
-    <string name="meeting_point_title">Meeting Point</string>
-    <string name="destination_title">Destination</string>
-    <string name="map_btn_content">Map</string>
 
     <string name="email_error_text"><b>Email must be in format example@example.com</b></string>
 
-    <string name="password_error_text"><b>Your password must meet the following criteria:\n
+    <string name="password_error_text">
+        <b>Your password must meet the following criteria:\n
                 <li> Must be at least eight (8) characters long\n</li>
                 <li> Must contain both uppercase and lowercase letters\n</li>
                 <li> Must contain a number\n</li>
-</b></string>
-
-
-    <string name="help">Help</string>
-    <string name="first_specifiy_the_destination_and_meeting_point_of_the_group_you_can_specifiy_the_destination_using_the_place_picker_by_clicking_the_map_button_and_choosing_an_area_near_you_you_can_also_pick_the_destination_and_meeting_point_by_manually_entering_the_address_into_the_search_bar_be_as_specific_as_possible_once_both_the_meeting_point_and_destination_have_a_marker_on_the_map_click_the_plus_button_to_name_your_group">First, specifiy the destination and meeting point of the group. You can specifiy the destination using the place picker by clicking the map button and choosing an area near you. You can also pick the destination and meeting point by manually entering the address into the search bar (be as specific as possible!). Once both the meeting point and destination have a marker on the map, click the plus button to name your group.</string>
-    <string name="how_to_use_the_app">How to use the app:</string>
-
-
-
+        </b>
+    </string>
 
 </resources>

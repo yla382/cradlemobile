@@ -14,12 +14,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cradletrial.cradlevhtapp.R;
+import com.cradletrial.cradlevhtapp.UserRetrofitApi;
 import com.cradletrial.cradlevhtapp.model.User;
 import com.cradletrial.cradlevhtapp.model.UserInfoStorage;
-import com.cradletrial.cradlevhtapp.proxy.ProxyBuilder;
-import com.cradletrial.cradlevhtapp.proxy.ProxyManager;
-
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.jackson.JacksonConverterFactory;
+import retrofit2.http.HTTP;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -44,17 +47,15 @@ public class LoginActivity extends AppCompatActivity {
         userInfoStorage = new UserInfoStorage(this);
         userInfoStorage.getSavedInfo();
 
-        if(wasUserLoggedIn()){
+        if(userInfoStorage.isLoggedIn()){
             goToReadingList();
         }
 
         setupLoginButton();
         createNewUser();
+
     }
 
-    private boolean wasUserLoggedIn() {
-        return ProxyManager.getToken() != null;
-    }
 
     private void goToReadingList(){
 
@@ -70,32 +71,32 @@ public class LoginActivity extends AppCompatActivity {
             case CREATE_USER:
 
                 if(resultCode == Activity.RESULT_OK){
-                    updateInputs(getString(R.string.result_ok), User.getCurrentUser().getEmail(), false);
+                    Toast.makeText(LoginActivity.this, "Account created", Toast.LENGTH_SHORT).show();
+                    updateInputs(getString(R.string.result_ok));
                 } else {
-                    updateInputs(getString(R.string.cancelled), getString(R.string.empty), true);
+                    updateInputs(getString(R.string.cancelled));
                 }
 
             case REMOVE_USER_INFO_ON_LOG_OUT:
 
                 if(resultCode == Activity.RESULT_OK){
 
-                    ProxyManager.setToken(null);
                     userInfoStorage.removeUserInfo();
-
-                    updateInputs(getString(R.string.result_ok), getString(R.string.empty), true);
+                    updateInputs(getString(R.string.result_ok));
                 }
         }
     }
 
-    private void updateInputs(String message, String email, boolean isPasswordEmpty) {
+    private void updateInputs(String message) {
 
         Log.i(TAG, message);
         EditText emailEditText = findViewById(R.id.email);
-        emailEditText.setText(email);
 
-        if(isPasswordEmpty){
-            EditText passwordEditText = findViewById(R.id.password);
-            passwordEditText.setText(getString(R.string.empty));
+        if(User.getCurrentUser().getEmail() != null) {
+            emailEditText.setText(User.getCurrentUser().getEmail());
+        }
+        else{
+            emailEditText.setText("");
         }
     }
 
@@ -119,7 +120,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(this, R.string.empty_error_toast, Toast.LENGTH_SHORT).show();
             } else {
                 disableButton();
-                checkLogin();
+                checkLogin(email, password);
             }
         });
     }
@@ -140,23 +141,42 @@ public class LoginActivity extends AppCompatActivity {
         }, DISABLE_TIME_IN_MS);
     }
 
-    private void checkLogin(){
+    private void checkLogin(String email, String password){
 
-        ProxyBuilder.setOnTokenReceiveCallback(this::onReceiveToken);
-        Call<Void> caller = ProxyManager.getProxy(this).login(User.getCurrentUser());
-        ProxyBuilder.callProxy(this, caller, this::onUserLoggedIn);
-    }
+//        ProxyBuilder.setOnTokenReceiveCallback(this::onReceiveToken);
+//        Call<Void> caller = ProxyManager.getProxy(this).login(User.getCurrentUser());
+//        ProxyBuilder.callProxy(this, caller, this::onUserLoggedIn);
 
-    private void onReceiveToken(String token){
 
-        Log.i(TAG, getString(R.string.now_have_token) + token);
-        ProxyManager.setToken(token);
-    }
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://10.0.2.2:8080/")
+                .addConverterFactory(JacksonConverterFactory.create())
+                .build();
 
-    private void onUserLoggedIn(Void returnedNothing) {
+        UserRetrofitApi userRetrofitApi = retrofit.create(UserRetrofitApi.class);
+        Call<User> call = userRetrofitApi.login(email, password);
 
-        Call<User> caller = ProxyManager.getProxy(this).getUserByEmail(User.getCurrentUser().getEmail());
-        ProxyBuilder.callProxy(this, caller, this::onCurrentUserReceived);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+
+                if(!response.isSuccessful()){
+                    Toast.makeText(LoginActivity.this, "Response: " + response.code() + "\nIncorrect email or password", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                onCurrentUserReceived(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
+                Toast.makeText(LoginActivity.this, "Error: "  + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
     }
 
     private void onCurrentUserReceived(User currentUser) {

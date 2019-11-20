@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.cradletrial.cradlevhtapp.R;
-import com.cradletrial.cradlevhtapp.proxy.ProxyManager;
 
 
 /**
@@ -45,8 +44,6 @@ public class UserInfoStorage {
         User.getCurrentUser().setPassword(password);
         User.getCurrentUser().setPhoneNumber(phoneNumber);
         User.getCurrentUser().setRole(roles);
-
-        ProxyManager.setToken(preferences.getString(activity.getString(R.string.save_token), null));
     }
 
     public void saveUserInfo(){
@@ -62,8 +59,6 @@ public class UserInfoStorage {
         editor.putString(activity.getString(R.string.save_phone_number), User.getCurrentUser().getPhoneNumber());
         editor.putString(activity.getString(R.string.save_roles), User.getCurrentUser().getRolesAsString());
 
-        editor.putString(activity.getString(R.string.save_token), ProxyManager.getToken());
-
         Log.i(TAG, "user info saved");
         editor.apply();
     }
@@ -71,9 +66,19 @@ public class UserInfoStorage {
     public void removeUserInfo(){
 
         SharedPreferences sharedPreferences = activity.getSharedPreferences(savedInfo, Context.MODE_PRIVATE);
-        sharedPreferences.edit().clear().apply();
+        sharedPreferences.edit().remove(activity.getString(R.string.save_id)).apply();
+        sharedPreferences.edit().remove(activity.getString(R.string.save_first_name)).apply();
+        sharedPreferences.edit().remove(activity.getString(R.string.save_last_name)).apply();
+        sharedPreferences.edit().remove(activity.getString(R.string.save_user_email)).apply();
+        sharedPreferences.edit().remove(activity.getString(R.string.save_user_password)).apply();
+        sharedPreferences.edit().remove(activity.getString(R.string.save_phone_number)).apply();
+        sharedPreferences.edit().remove(activity.getString(R.string.save_roles)).apply();
 
         Log.i(TAG, "user info removed");
+    }
+
+    public Boolean isLoggedIn(){
+        return User.getCurrentUser() != null && User.getCurrentUser().getEmail() != null && User.getCurrentUser().getPassword() != null;
     }
 
 }

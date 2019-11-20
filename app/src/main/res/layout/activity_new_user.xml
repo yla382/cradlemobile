@@ -138,6 +138,49 @@
             android:padding="5dp">
 
             <ImageView
+                android:id="@+id/phone_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:src="@android:drawable/stat_sys_phone_call" />
+
+            <EditText
+                android:id="@+id/phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="@string/phone_number"
+                android:imeOptions="actionNext"
+                android:inputType="phone"
+                android:maxLength="35"
+                android:padding="15dp"
+                android:singleLine="true"
+                android:textSize="14sp" />
+
+
+            <ImageView
+                android:id="@+id/phone_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginStart="-25dp"
+                android:clickable="true"
+                android:paddingTop="15dp"
+                android:src="@drawable/error_icon"
+                android:visibility="invisible"
+                android:focusable="true" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_border"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <ImageView
                 android:id="@+id/password_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -21,62 +21,26 @@ public class User {
         return currentUser;
     }
 
-
-
-
     public enum Role {
         VHT,
         HEALTH_WORKER,
         ADMIN;
     }
 
-
     private Integer userId;
-
-
-    public User(User user) {
-        this.userId = user.userId;
-        this.password = user.password;
-//        setEncodedPassword(user.password);
-        this.firstName = user.firstName;
-        this.lastName = user.lastName;
-        this.roles = user.roles;
-        this.email = user.email;
-        this.phoneNumber = user.phoneNumber;
-    }
-
-    public User(User user, String password) {
-        this.userId = user.userId;
-        this.password = user.password;
-//        setEncodedPassword(password);
-        this.firstName = user.firstName;
-        this.lastName = user.lastName;
-        this.roles = user.roles;
-        this.email = user.email;
-        this.phoneNumber = user.phoneNumber;
-    }
-
-    public User(String password, String firstName, String lastName, String email, String roles, String phoneNumber) {
-        this.password = password;
-//        setEncodedPassword(password);
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.roles = roles;
-        this.phoneNumber = phoneNumber;
-    }
-
-
-    public User(String encode, String john, String lee, String s, String admin) {
-    }
-
-
     private String email = null;
     private String phoneNumber = null;
     private String password = null;
     private String firstName = null;
     private String lastName = null;
     private String roles = null;
+
+
+    public User(String email, String password){
+        this.email = email;
+        this.password = password;
+    }
+
 
     public Integer getUserId() {
         return userId;
@@ -138,14 +102,6 @@ public class User {
 
     public void setRole(String roles) {
         this.roles = roles;
-    }
-
-    public List<String> getRoles() {
-        if(this.roles.length() > 0) {
-            return Arrays.asList(this.roles.split(","));
-        } else {
-            return new ArrayList<>();
-        }
     }
 
     public String getRolesAsString() {
