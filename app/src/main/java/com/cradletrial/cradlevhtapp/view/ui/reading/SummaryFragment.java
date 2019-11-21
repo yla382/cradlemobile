@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
@@ -330,6 +331,7 @@ public class SummaryFragment extends BaseFragment {
             }
             else if (retestAnalysis.isRetestRecommendedIn15Min()) {
                 tvRecommend.setText("Recheck vitals in 15 minutes is recommended");
+                addNotification();
             } else {
                 Util.ensure(false);
             }
@@ -340,6 +342,16 @@ public class SummaryFragment extends BaseFragment {
 
         // set border color based on recommendation
         setRectangleStrokeColor(R.id.sectionRecheckVitals, retestAnalysis.isRetestRecommended());
+    }
+
+    private void addNotification() {
+        // Build notification
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this.getContext())
+                .setSmallIcon(R.drawable.status_yellow)
+                .setContentTitle("Recheck Vitals")
+                .setContentText("Time to recheck vitals for previous reading");
+
+
     }
 
     private void updateUI_Referral(ReadingRetestAnalysis retestAnalysis) {
