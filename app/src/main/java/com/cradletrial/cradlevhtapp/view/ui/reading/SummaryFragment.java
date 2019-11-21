@@ -1,5 +1,7 @@
 package com.cradletrial.cradlevhtapp.view.ui.reading;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -10,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
@@ -34,6 +37,9 @@ import com.cradletrial.cradlevhtapp.viewmodel.ReadingAnalysisViewSupport;
 
 import org.threeten.bp.ZonedDateTime;
 import org.threeten.bp.temporal.ChronoUnit;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  *  Display summary and advice for currentReading.
@@ -335,7 +341,7 @@ public class SummaryFragment extends BaseFragment {
             }
             else if (retestAnalysis.isRetestRecommendedIn15Min()) {
                 tvRecommend.setText("Recheck vitals in 15 minutes is recommended");
-                addNotification();
+                startCountdown();
             } else {
                 Util.ensure(false);
             }
@@ -346,6 +352,18 @@ public class SummaryFragment extends BaseFragment {
 
         // set border color based on recommendation
         setRectangleStrokeColor(R.id.sectionRecheckVitals, retestAnalysis.isRetestRecommended());
+    }
+
+    private void startCountdown() {
+        // 10000 milliseconds == 10 secs
+        int ms = 10000;
+
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                addNotification();
+            }
+        }, ms);
     }
 
     private void addNotification() {
