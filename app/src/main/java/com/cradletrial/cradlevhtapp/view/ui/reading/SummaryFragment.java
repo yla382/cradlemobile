@@ -1,5 +1,9 @@
 package com.cradletrial.cradlevhtapp.view.ui.reading;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -351,7 +355,13 @@ public class SummaryFragment extends BaseFragment {
                 .setContentTitle("Recheck Vitals")
                 .setContentText("Time to recheck vitals for previous reading");
 
+        Intent notificationIntent = new Intent(this.getContext(), SummaryFragment.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this.getContext(), 0,
+                notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+        // Add the notification
+        NotificationManager manager = (NotificationManager) this.getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        manager.notify(0, builder.build());
     }
 
     private void updateUI_Referral(ReadingRetestAnalysis retestAnalysis) {
