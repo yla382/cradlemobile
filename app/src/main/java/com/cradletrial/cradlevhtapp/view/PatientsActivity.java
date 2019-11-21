@@ -52,7 +52,7 @@ public class PatientsActivity extends TabActivityBase {
     @Inject
     Settings settings;
 
-
+    List<Patient> patients = new ArrayList<>();
     public static Intent makeIntent(Context context) {
         return new Intent(context, PatientsActivity.class);
     }
@@ -108,9 +108,14 @@ public class PatientsActivity extends TabActivityBase {
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            String item = listView.getItemAtPosition(position).toString();
-                            String[] string_array = item.split("\\s+");
-                            Integer patientId = Integer.parseInt(string_array[2]);
+                            //String item = listView.getItemAtPosition(position).toString();
+                            //String[] string_array = item.split("\\s+");
+                            //Integer patientId = Integer.parseInt(string_array[2]);
+                            Patient patient = patients.get(position);
+                            Intent intent = new Intent(getApplicationContext(), PatientsInfoActivity.class);
+                            intent.putExtra("patients_info", patients.get(position));
+                            System.out.println(patient.toString());
+                            startActivity(intent);
                         }
                     });
                 }
@@ -137,6 +142,7 @@ public class PatientsActivity extends TabActivityBase {
 
             ObjectMapper objectMapper = new ObjectMapper();
             Patient patient = objectMapper.readValue(jsonArray.get(i).toString(), Patient.class);
+            patients.add(patient);
             Log.d("For loop: ", patient.toString());
 
             stringList.add(patient.getFirstName() + " " + patient.getLastName() + " " +
