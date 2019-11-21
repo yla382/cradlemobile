@@ -367,19 +367,42 @@ public class SummaryFragment extends BaseFragment {
     }
 
     private void addNotification() {
+        createNotificationChannels();
         // Build notification
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this.getContext())
+        String CHANNEL_ID = "my_channel_01";
+        String title = "Recheck Vitals";
+        String message = "Time to recheck vitals for previous reading";
+
+        Notification notification = new NotificationCompat.Builder(this.getContext(), CHANNEL_ID)
                 .setSmallIcon(R.drawable.status_yellow)
-                .setContentTitle("Recheck Vitals")
-                .setContentText("Time to recheck vitals for previous reading");
+                .setContentTitle(title)
+                .setContentText(message)
+                .build();
 
-        Intent notificationIntent = new Intent(this.getContext(), SummaryFragment.class);
-        PendingIntent contentIntent = PendingIntent.getActivity(this.getContext(), 0,
-                notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        NotificationManagerCompat manager = NotificationManagerCompat.from(this.getContext());
+        manager.notify(1, notification);
+//        Intent notificationIntent = new Intent(this.getContext(), SummaryFragment.class);
+//        PendingIntent contentIntent = PendingIntent.getActivity(this.getContext(), 0,
+//                notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//        // Add the notification
+//        NotificationManager manager = (NotificationManager) this.getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+//        manager.notify(0, builder.build());
+    }
 
-        // Add the notification
-        NotificationManager manager = (NotificationManager) this.getContext().getSystemService(Context.NOTIFICATION_SERVICE);
-        manager.notify(0, builder.build());
+    private void createNotificationChannels() {
+        String CHANNEL_ID = "my_channel_01";
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel channel1 = new NotificationChannel(
+                    CHANNEL_ID,
+                    "channel 1",
+                    NotificationManager.IMPORTANCE_DEFAULT
+            );
+            channel1.setDescription("Recheck Vitals Channel");
+
+            NotificationManager manager = this.getContext().getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel1);
+        }
     }
 
     private void updateUI_Referral(ReadingRetestAnalysis retestAnalysis) {
