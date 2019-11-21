@@ -48,6 +48,7 @@ public class SummaryFragment extends BaseFragment {
 
     public static final int STROKE_WIDTH_RECOMMENDED = 6;
     public static final int STROKE_WIDTH_NORMAL = 3;
+    public static final String CHANNEL_ID1 = "my_channel_01";
 
     public SummaryFragment() {
         // Required empty public constructor
@@ -369,11 +370,10 @@ public class SummaryFragment extends BaseFragment {
     private void addNotification() {
         createNotificationChannels();
         // Build notification
-        String CHANNEL_ID = "my_channel_01";
         String title = "Recheck Vitals";
         String message = "Time to recheck vitals for previous reading";
 
-        Notification notification = new NotificationCompat.Builder(this.getContext(), CHANNEL_ID)
+        Notification notification = new NotificationCompat.Builder(this.getContext(), CHANNEL_ID1)
                 .setSmallIcon(R.drawable.status_yellow)
                 .setContentTitle(title)
                 .setContentText(message)
@@ -381,20 +381,12 @@ public class SummaryFragment extends BaseFragment {
 
         NotificationManagerCompat manager = NotificationManagerCompat.from(this.getContext());
         manager.notify(1, notification);
-//        Intent notificationIntent = new Intent(this.getContext(), SummaryFragment.class);
-//        PendingIntent contentIntent = PendingIntent.getActivity(this.getContext(), 0,
-//                notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-//
-//        // Add the notification
-//        NotificationManager manager = (NotificationManager) this.getContext().getSystemService(Context.NOTIFICATION_SERVICE);
-//        manager.notify(0, builder.build());
     }
 
     private void createNotificationChannels() {
-        String CHANNEL_ID = "my_channel_01";
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             NotificationChannel channel1 = new NotificationChannel(
-                    CHANNEL_ID,
+                    CHANNEL_ID1,
                     "channel 1",
                     NotificationManager.IMPORTANCE_DEFAULT
             );
