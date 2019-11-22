@@ -72,6 +72,22 @@
             android:screenOrientation="portrait"
             >
         </activity>
+
+        <activity
+            android:name=".view.LoginActivity"
+            android:label="Login"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+
+
+        <activity
+            android:name=".view.NewUserActivity"
+            android:label="New User"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+
         <activity android:name=".view.ui.settings.SettingNamedPairsActivity"></activity>
 
     </application>

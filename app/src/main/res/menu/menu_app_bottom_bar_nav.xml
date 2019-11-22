@@ -26,4 +26,11 @@
         android:orderInCategory="130"
         android:title="@string/menu_help"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/baseline_logout_black_24"
+        android:orderInCategory="140"
+        android:title="@string/menu_logout"
+        app:showAsAction="never" />
 </menu>

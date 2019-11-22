@@ -1,15 +1,19 @@
 package com.cradletrial.cradlevhtapp.view;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.cradletrial.cradlevhtapp.BuildConfig;
 import com.cradletrial.cradlevhtapp.R;
 import com.cradletrial.cradlevhtapp.view.ui.settings.SettingsActivity;
+
+import java.sql.ResultSet;
 
 abstract public class TabActivityBase extends AppCompatActivity {
     protected static final int TAB_ACTIVITY_BASE_SETTINGS_DONE = 948;
@@ -76,6 +80,10 @@ abstract public class TabActivityBase extends AppCompatActivity {
                 return true;
             case R.id.nav_help:
                 startActivity(HelpActivity.makeIntent(this));
+                finish();
+                return true;
+            case R.id.nav_logout:
+                setResult(Activity.RESULT_OK);
                 finish();
                 return true;
         }
