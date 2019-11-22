@@ -1,10 +1,18 @@
 package com.cradletrial.cradlevhtapp.view.ui.reading;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
@@ -30,6 +38,9 @@ import com.cradletrial.cradlevhtapp.viewmodel.ReadingAnalysisViewSupport;
 import org.threeten.bp.ZonedDateTime;
 import org.threeten.bp.temporal.ChronoUnit;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  *  Display summary and advice for currentReading.
  */
@@ -37,6 +48,7 @@ public class SummaryFragment extends BaseFragment {
 
     public static final int STROKE_WIDTH_RECOMMENDED = 6;
     public static final int STROKE_WIDTH_NORMAL = 3;
+    public static final String CHANNEL_ID1 = "my_channel_01";
 
     public SummaryFragment() {
         // Required empty public constructor
@@ -330,6 +342,7 @@ public class SummaryFragment extends BaseFragment {
             }
             else if (retestAnalysis.isRetestRecommendedIn15Min()) {
                 tvRecommend.setText("Recheck vitals in 15 minutes is recommended");
+                startCountdown();
             } else {
                 Util.ensure(false);
             }
@@ -340,6 +353,50 @@ public class SummaryFragment extends BaseFragment {
 
         // set border color based on recommendation
         setRectangleStrokeColor(R.id.sectionRecheckVitals, retestAnalysis.isRetestRecommended());
+    }
+
+    private void startCountdown() {
+        // 5000 milliseconds == 5 secs
+        int ms = 5000;
+
+        Context context = this.getContext();
+
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                addNotification(context);
+            }
+        }, ms);
+    }
+
+    private void addNotification(Context context) {
+        createNotificationChannels();
+        // Build notification
+        String title = "Recheck Vitals";
+        String message = "Time to recheck vitals for previous reading";
+
+        Notification notification = new NotificationCompat.Builder(context, CHANNEL_ID1)
+                .setSmallIcon(R.drawable.status_yellow)
+                .setContentTitle(title)
+                .setContentText(message)
+                .build();
+
+        NotificationManagerCompat manager = NotificationManagerCompat.from(context);
+        manager.notify(1, notification);
+    }
+
+    private void createNotificationChannels() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel channel1 = new NotificationChannel(
+                    CHANNEL_ID1,
+                    "channel 1",
+                    NotificationManager.IMPORTANCE_DEFAULT
+            );
+            channel1.setDescription("Recheck Vitals Channel");
+
+            NotificationManager manager = this.getContext().getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel1);
+        }
     }
 
     private void updateUI_Referral(ReadingRetestAnalysis retestAnalysis) {
