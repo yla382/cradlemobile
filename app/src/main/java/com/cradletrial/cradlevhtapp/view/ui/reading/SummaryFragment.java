@@ -356,30 +356,32 @@ public class SummaryFragment extends BaseFragment {
     }
 
     private void startCountdown() {
-        // 10000 milliseconds == 10 secs
-        int ms = 10000;
+        // 5000 milliseconds == 5 secs
+        int ms = 5000;
+
+        Context context = this.getContext();
 
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-                addNotification();
+                addNotification(context);
             }
         }, ms);
     }
 
-    private void addNotification() {
+    private void addNotification(Context context) {
         createNotificationChannels();
         // Build notification
         String title = "Recheck Vitals";
         String message = "Time to recheck vitals for previous reading";
 
-        Notification notification = new NotificationCompat.Builder(this.getContext(), CHANNEL_ID1)
+        Notification notification = new NotificationCompat.Builder(context, CHANNEL_ID1)
                 .setSmallIcon(R.drawable.status_yellow)
                 .setContentTitle(title)
                 .setContentText(message)
                 .build();
 
-        NotificationManagerCompat manager = NotificationManagerCompat.from(this.getContext());
+        NotificationManagerCompat manager = NotificationManagerCompat.from(context);
         manager.notify(1, notification);
     }
 
