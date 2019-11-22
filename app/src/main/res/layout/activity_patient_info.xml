@@ -1,115 +1,482 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/ID"
-        android:layout_width="188dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="24dp"
-        android:text="attestationID:"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="0dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_marginTop="4dp"
-        android:text="Name:"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ID" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/age"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:text="Age:"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+            <TextView
+                android:id="@+id/ID"
+                android:layout_width="188dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="0dp"
+                android:text="attestationID:"
+                android:textSize="30sp" />
 
-    <TextView
-        android:id="@+id/country"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:text="Country:"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/age" />
+            <TextView
+                android:id="@+id/Patient_AT_ID"
+                android:layout_width="205dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="0dp"
+                android:textSize="30sp" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/location"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:text="Location:"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/country" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/Patient_AT_ID"
-        android:layout_width="205dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="24dp"
-        android:textSize="30sp"
-        app:layout_constraintStart_toEndOf="@+id/ID"
-        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginLeft="2dp"
+                android:text="Name:"
+                android:textSize="30sp"/>
 
-    <TextView
-        android:id="@+id/Patient_name"
-        android:layout_width="205dp"
-        android:layout_height="35dp"
-        android:textSize="30sp"
-        app:layout_constraintStart_toEndOf="@+id/name"
-        app:layout_constraintTop_toBottomOf="@+id/Patient_AT_ID" />
+            <TextView
+                android:id="@+id/Patient_name"
+                android:layout_width="205dp"
+                android:layout_height="40dp"
+                android:textSize="30sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/Patient_age"
-        android:layout_width="208dp"
-        android:layout_height="35dp"
-        android:textSize="30sp"
-        app:layout_constraintStart_toEndOf="@+id/age"
-        app:layout_constraintTop_toBottomOf="@+id/Patient_name" />
+            <TextView
+                android:id="@+id/age"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginLeft="2dp"
+                android:text="Age:"
+                android:textSize="30sp"
+                />
+            <TextView
+                android:id="@+id/Patient_age"
+                android:layout_width="208dp"
+                android:layout_height="40dp"
+                android:textSize="30sp" />
 
-    <TextView
-        android:id="@+id/Patient_country"
-        android:layout_width="203dp"
-        android:layout_height="35dp"
-        android:textSize="30sp"
-        app:layout_constraintStart_toEndOf="@+id/country"
-        app:layout_constraintTop_toBottomOf="@+id/Patient_age" />
 
-    <TextView
-        android:id="@+id/Patient_location"
-        android:layout_width="205dp"
-        android:layout_height="35dp"
-        android:textSize="30sp"
-        app:layout_constraintStart_toEndOf="@+id/location"
-        app:layout_constraintTop_toBottomOf="@+id/Patient_country" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/readings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Readings:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/location" />
+            <TextView
+                android:id="@+id/country"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginLeft="2dp"
+                android:text="Country:"
+                android:textSize="30sp" />
+            <TextView
+                android:id="@+id/Patient_country"
+                android:layout_width="203dp"
+                android:layout_height="40dp"
+                android:textSize="30sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <Spinner
-        android:id="@+id/patientReadings"
-        android:layout_width="163dp"
-        android:layout_height="21dp"
-        android:layout_marginTop="24dp"
-        android:spinnerMode="dropdown"
-        app:layout_constraintStart_toEndOf="@+id/readings"
-        app:layout_constraintTop_toBottomOf="@+id/Patient_location" />
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginLeft="2dp"
+                android:text="Location:"
+                android:textSize="30sp" />
+            <TextView
+                android:id="@+id/Patient_location"
+                android:layout_width="203dp"
+                android:layout_height="40dp"
+                android:textSize="30sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/readings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Readings:" />
+                <Spinner
+                    android:id="@+id/patientReadings"
+                    android:layout_width="163dp"
+                    android:layout_height="21dp"
+                    android:gravity="top"
+                    android:layout_marginTop="5dp"
+                    android:spinnerMode="dropdown" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical"
+                >
+
+                <!-- Patient Info -->
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/section_Patient"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/txt_PatientHeader"
+                        style="@style/SubHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="A.D, 25y @ 12w +5d" />
+
+                    <TextView
+                        android:id="@+id/txt_Symptoms"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_PatientHeader"
+                        tools:layout_editor_absoluteX="16dp"
+                        tools:text="Headache, Unwell" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_Readings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="vertical"
+                    tools:layout_height="10dp"
+                    >
+                    <!-- Readings go here programatically-->
+                </LinearLayout>
+
+
+                <!-- Advice -->
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/section_Advice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/txt_AdviceHeader"
+                        style="@style/SubHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Advice"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txt_Advice"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:selectAllOnFocus="false"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toStartOf="@+id/img_BtnAdviceInfo"
+                        app:layout_constraintStart_toStartOf="@+id/txt_AdviceHeader"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_AdviceHeader"
+                        tools:text="Retest the patient immediately to confirm the reading." />
+
+                    <ImageButton
+                        android:id="@+id/img_BtnAdviceInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:src="@android:drawable/ic_dialog_info"
+                        android:visibility="invisible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/txt_Advice" />
+
+                </android.support.constraint.ConstraintLayout>
+
+
+                <!-- Recheck Vitals -->
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/section_RecheckVitals"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/round_rect_shape"
+                    >
+
+                    <ImageView
+                        android:id="@+id/iv_RecheckVitals"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/clock" />
+
+                    <!-- TODO: Flatten the nested constraint layouts using groups, etc: https://riggaroo.co.za/constraintlayout-guidelines-barriers-chains-groups/ -->
+                    <android.support.constraint.ConstraintLayout
+                        android:id="@+id/nested_ContentRecheckVitals"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/iv_RecheckVitals"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        >
+
+                        <Switch
+                            android:id="@+id/sw_RecheckVitalsNow"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Recheck vitals now (after save)"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Switch
+                            android:id="@+id/sw_RecheckVitalsIn15"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Recheck vitals in 15 minutes (after save)"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/sw_RecheckVitalsNow" />
+
+                        <TextView
+                            android:id="@+id/txt_RecheckVitalsRecommended"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="Recheck vitals now is recommended"
+                            android:textColor="@color/recommended"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/sw_RecheckVitalsIn15" />
+                    </android.support.constraint.ConstraintLayout>
+                </android.support.constraint.ConstraintLayout>
+
+                <!-- Referral -->
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/section_Referral"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/round_rect_shape"
+                    >
+
+                    <ImageView
+                        android:id="@+id/iv_Referral"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/hospital" />
+
+                    <android.support.constraint.ConstraintLayout
+                        android:id="@+id/nested_ContentReferral"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/iv_Referral"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/txt_ReferralSent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Referral sent May 12, 2019 @ 11:53am"
+                            android:textColor="@android:color/primary_text_light"
+                            app:layout_constraintEnd_toStartOf="@+id/iv_ReferralSent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/iv_ReferralSent"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="16dp"
+                            android:tint="@color/recommended"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/txt_ReferralSent"
+                            app:srcCompat="@drawable/baseline_check_circle_black_24" />
+
+                        <TextView
+                            android:id="@+id/txt_ReferralRecommended"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:text="Referral recommended"
+                            android:textColor="@color/recommended"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_ReferralSent" />
+
+
+                        <Button
+                            android:id="@+id/btn_SendReferral"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:insetTop="10dp"
+                            android:insetBottom="10dp"
+                            android:paddingStart="5dp"
+                            android:paddingEnd="5dp"
+                            android:text="Send Referral"
+                            app:backgroundTint="@color/light_grey"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_ReferralSent" />
+
+                    </android.support.constraint.ConstraintLayout>
+
+                </android.support.constraint.ConstraintLayout>
+
+
+                <!-- Follow-up -->
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/section_FollowUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/round_rect_shape"
+                    >
+
+
+                    <ImageView
+                        android:id="@+id/iv_Followup"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@mipmap/followup" />
+
+                    <android.support.constraint.ConstraintLayout
+                        android:id="@+id/nested_ContentFollowup"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/iv_Followup"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        >
+
+                        <Switch
+                            android:id="@+id/sw_FollowUpNeeded"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="Follow-up needed (another day)"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/txt_FollowupRecommended"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:text="Follow-up recommended"
+                            android:textColor="@color/recommended"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/sw_FollowUpNeeded"
+                            app:layout_constraintTop_toBottomOf="@+id/sw_FollowUpNeeded" />
+
+                    </android.support.constraint.ConstraintLayout>
+
+                </android.support.constraint.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/txt_UploadedMessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    tools:text="This patient reading was uploaded to a server on May 13 2021 @ 8:23pm" />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</RelativeLayout>
