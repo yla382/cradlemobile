@@ -47,6 +47,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".view.PatientsInfoActivity"
+            android:label="Patient_info"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".view.UploadActivity"
             android:label="@string/title_activity_upload"
             android:screenOrientation="portrait"

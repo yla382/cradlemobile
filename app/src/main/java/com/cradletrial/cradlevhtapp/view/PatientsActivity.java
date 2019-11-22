@@ -113,8 +113,7 @@ public class PatientsActivity extends TabActivityBase {
                             //Integer patientId = Integer.parseInt(string_array[2]);
                             Patient patient = patients.get(position);
                             Intent intent = new Intent(getApplicationContext(), PatientsInfoActivity.class);
-                            intent.putExtra("patients_info", patients.get(position));
-                            System.out.println(patient.toString());
+                            intent.putExtra("patient", patients.get(position));
                             startActivity(intent);
                         }
                     });

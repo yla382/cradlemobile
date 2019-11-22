@@ -1,6 +1,11 @@
 package com.cradletrial.cradlevhtapp.model;
 
-public class Patient {
+import android.os.Parcelable;
+import android.os.Parcel;
+
+import java.io.Serializable;
+
+public class Patient implements Parcelable {
     private Integer patientId;
     private String attestationID;
     private String firstName = null;
@@ -11,7 +16,7 @@ public class Patient {
 
 
 
-    public Patient() {
+    public Patient(){
     }
 
     public Patient(Integer patientId, String attestationID, String firstName, String lastName, String country, String location) {
@@ -29,6 +34,36 @@ public class Patient {
         this.ageYears = ageYears;
     }
 
+
+    protected Patient(Parcel in) {
+        if (in.readByte() == 0) {
+            patientId = null;
+        } else {
+            patientId = in.readInt();
+        }
+        attestationID = in.readString();
+        firstName = in.readString();
+        lastName = in.readString();
+        if (in.readByte() == 0) {
+            ageYears = null;
+        } else {
+            ageYears = in.readInt();
+        }
+        country = in.readString();
+        location = in.readString();
+    }
+
+    public static final Creator<Patient> CREATOR = new Creator<Patient>() {
+        @Override
+        public Patient createFromParcel(Parcel in) {
+            return new Patient(in);
+        }
+
+        @Override
+        public Patient[] newArray(int size) {
+            return new Patient[size];
+        }
+    };
 
     public Integer getPatientId() {
         return patientId;
@@ -100,5 +135,31 @@ public class Patient {
                 ", country='" + country + '\'' +
                 ", location='" + location + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (patientId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(patientId);
+        }
+        dest.writeString(attestationID);
+        dest.writeString(firstName);
+        dest.writeString(lastName);
+        if (ageYears == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(ageYears);
+        }
+        dest.writeString(country);
+        dest.writeString(location);
     }
 }
