@@ -4,7 +4,6 @@ import android.os.Build;
 
 import com.cradletrial.cradlevhtapp.BuildConfig;
 import com.cradletrial.cradlevhtapp.utilitiles.Util;
-import com.google.gson.Gson;
 
 import org.threeten.bp.ZonedDateTime;
 import org.threeten.bp.temporal.ChronoUnit;
@@ -97,6 +96,35 @@ public class Reading {
      */
     public Reading() {
         // for JSON only
+    }
+
+    public Reading(WebReading webReading) {
+        this.readingId = webReading.getReadingId();
+        this.dateLastSaved = webReading.getDateLastSaved();
+        this.patientId = webReading.getPatientId();
+        this.patientFirstName = webReading.getPatientFirstName();
+        this.patientLastName = webReading.getPatientLastName();
+        this.ageYears = webReading.getAgeYears();
+        this.symptoms = webReading.getSymptoms();
+        this.gestationalAgeUnit = webReading.getGestationalAgeUnit();
+        this.gestationalAgeValue = webReading.getGestationalAgeValue();
+        this.pathToPhoto = webReading.getPathToPhoto();
+        this.bpSystolic = webReading.getBpSystolic();
+        this.bpDiastolic = webReading.getBpDiastolic();
+        this.heartRateBPM = webReading.getHeartRateBPM();
+        this.dateTimeTaken = webReading.getDateTimeTaken();
+        this.gpsLocationOfReading = null;
+        this.dateUploadedToServer = null;
+        this.retestOfPreviousReadingIds = webReading.getRetestOfPreviousReadingIds();
+        this.dateRecheckVitalsNeeded = webReading.getDateRecheckVitalsNeeded();
+        this.isFlaggedForFollowup = webReading.getIsFlaggedForFollowup();
+        this.referralMessageSendTime = null;
+        this.referralHealthCentre = null;
+        this.referralComment = null;
+        this.appVersion = webReading.getAppVersion();
+        this.deviceInfo = webReading.getDeviceInfo();
+        this.totalOcrSeconds = webReading.getTotalOcrSeconds();
+        this.manuallyChangeOcrResults = webReading.getManuallyChangeOcrResults();
     }
 
     public static Reading makeNewReading(ZonedDateTime now) {

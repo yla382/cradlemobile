@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -50,7 +52,7 @@ public class PatientsActivity extends TabActivityBase {
     @Inject
     Settings settings;
 
-
+    List<Patient> patients = new ArrayList<>();
     public static Intent makeIntent(Context context) {
         return new Intent(context, PatientsActivity.class);
     }
@@ -87,7 +89,7 @@ public class PatientsActivity extends TabActivityBase {
 
     private void getPatientsFromServer() {
         RequestQueue mRequestQueue;
-        String url = "http://cmpt373.csil.sfu.ca:8081/android/patients";
+        String url = "http://192.168.19.1:8080/android/patients";
         String TAG = PatientsActivity.class.getName();
 
         mRequestQueue = Volley.newRequestQueue(this);
@@ -103,6 +105,18 @@ public class PatientsActivity extends TabActivityBase {
                     Log.d("Response: ", jsonArray.toString());
 
                     setupListView(listView, jsonArray);
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            //String item = listView.getItemAtPosition(position).toString();
+                            //String[] string_array = item.split("\\s+");
+                            //Integer patientId = Integer.parseInt(string_array[2]);
+                            Patient patient = patients.get(position);
+                            Intent intent = new Intent(getApplicationContext(), PatientsInfoActivity.class);
+                            intent.putExtra("patient", patients.get(position));
+                            startActivity(intent);
+                        }
+                    });
                 }
                 catch (Throwable tx) {
                     Log.e("PatientsActivity: ", "Could not parse malformed JSON: \"" + response + "\"");
@@ -127,6 +141,7 @@ public class PatientsActivity extends TabActivityBase {
 
             ObjectMapper objectMapper = new ObjectMapper();
             Patient patient = objectMapper.readValue(jsonArray.get(i).toString(), Patient.class);
+            patients.add(patient);
             Log.d("For loop: ", patient.toString());
 
             stringList.add(patient.getFirstName() + " " + patient.getLastName() + " " +
