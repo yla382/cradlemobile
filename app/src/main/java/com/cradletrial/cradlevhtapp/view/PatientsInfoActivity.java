@@ -29,11 +29,13 @@ import com.cradletrial.cradlevhtapp.model.ReadingRetestAnalysis;
 import com.cradletrial.cradlevhtapp.model.WebReading;
 import com.cradletrial.cradlevhtapp.utilitiles.DateUtil;
 import com.cradletrial.cradlevhtapp.view.ui.reading.BaseFragment;
+import com.cradletrial.cradlevhtapp.view.ui.reading.SummaryFragment;
 import com.cradletrial.cradlevhtapp.viewmodel.ReadingAnalysisViewSupport;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.json.JSONArray;
 
+import java.security.Permission;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,22 +96,25 @@ public class PatientsInfoActivity extends AppCompatActivity{
         }
     }
 
-//    private void advice(Reading reading) {
-//        ReadingRetestAnalysis retestAnalysis = ReadingRetestAnalysis(reading, readingManager);
-//        String message = "";
-//        if (retestAnalysis.isRetestRecommendedNow()) {
-//            message = getString(R.string.brief_advice_retest_now);
-//        }
-//
-//        else if (retestAnalysis.isRetestRecommendedIn15Min()) {
-//            message = getString(R.string.brief_advice_retest_after15);
-//        }
-//
-//        else {
-//            ReadingAnalysis analysis = retestAnalysis.getMostRecentReadingAnalysis();
-//            message = analysis.getBriefAdviceText(getContext());
-//        }
-//    }
+    private void advice(Reading reading) {
+        Context context = new SummaryFragment().getActivity();
+        ReadingRetestAnalysis retestAnalysis = new ReadingRetestAnalysis(reading, readingManager, context);
+        String message = "";
+        if (retestAnalysis.isRetestRecommendedNow()) {
+            message = getString(R.string.brief_advice_retest_now);
+        }
+
+        else if (retestAnalysis.isRetestRecommendedIn15Min()) {
+            message = getString(R.string.brief_advice_retest_after15);
+        }
+
+        else {
+            ReadingAnalysis analysis = retestAnalysis.getMostRecentReadingAnalysis();
+            message = analysis.getBriefAdviceText(context);
+        }
+        TextView txt_Advice = (TextView) findViewById(R.id.txt_Advice);
+        txt_Advice.setText(message);
+    }
 
     private void reading_analyze(Reading reading) {
             TextView tv;
@@ -199,6 +204,7 @@ public class PatientsInfoActivity extends AppCompatActivity{
                     Reading reading = readings.get(position);
                     setReadingGest(reading);
                     setSymptoms(reading);
+                    advice(reading);
                     reading_analyze(reading);
                 }
 
