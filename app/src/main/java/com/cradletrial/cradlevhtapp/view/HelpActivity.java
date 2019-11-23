@@ -40,7 +40,8 @@ public class HelpActivity extends TabActivityBase {
         pdfButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getApplicationContext(), PdfActivity.class);
+                startActivity(intent);
             }
         });
     }

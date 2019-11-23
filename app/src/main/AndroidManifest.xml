@@ -93,6 +93,14 @@
             >
         </activity>
 
+        <activity
+            android:name=".view.PdfActivity"
+            android:label="PDF"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            >
+        </activity>
+
         <activity android:name=".view.ui.settings.SettingNamedPairsActivity"></activity>
 
     </application>

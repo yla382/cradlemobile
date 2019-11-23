@@ -145,7 +145,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8080/")
+                //.baseUrl("http://10.0.2.2:8080/")
+                .baseUrl("http://cmpt373.csil.sfu.ca:8081")
                 .addConverterFactory(JacksonConverterFactory.create())
                 .build();
 
