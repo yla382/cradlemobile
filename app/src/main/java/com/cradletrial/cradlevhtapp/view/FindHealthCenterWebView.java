@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -59,6 +60,7 @@ public class FindHealthCenterWebView extends AppCompatActivity{
 
     public String getUrl(String startLat, String startLon, String destLat, String destLon) {
         String url = "http://maps.google.com/maps?";
+        //String url = "<iframe width=\"550\" height=\"500\" frameborder=\"0\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\" src=\"http://maps.google.com/maps?" + startLat + startLon + "&source=embed&output=svembed\"></iframe>";
         String startLatLon = "saddr=" + startLat + "," + startLon;
         String destLatLon = "&daddr=" + destLat + "," + destLon;
 
@@ -106,7 +108,17 @@ public class FindHealthCenterWebView extends AppCompatActivity{
     public void displayMap(String url) {
         WebView webView = (WebView) findViewById(R.id.MapWebView);
         webView.getSettings().setJavaScriptEnabled(true);
-        //webView.loadData(, "text/html", null);
+        webView.setWebViewClient(new WebViewClient()
+        {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url)
+            {
+                //view.loadUrl(url);
+                //System.out.println("hello");
+                return false;
+            }
+        });
+        //webView.loadData(url, "text/html", null);
         webView.loadUrl(url);
     }
 
