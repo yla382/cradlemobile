@@ -1,10 +1,15 @@
 package com.cradletrial.cradlevhtapp.view;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,6 +22,7 @@ import com.cradletrial.cradlevhtapp.model.Reading;
 import com.cradletrial.cradlevhtapp.model.ReadingManager;
 import com.cradletrial.cradlevhtapp.model.Settings;
 import com.cradletrial.cradlevhtapp.utilitiles.DateUtil;
+import com.cradletrial.cradlevhtapp.utilitiles.GsonUtil;
 import com.cradletrial.cradlevhtapp.utilitiles.HybridFileEncrypter;
 import com.cradletrial.cradlevhtapp.view.ui.network_volley.MultiReadingUploader;
 
@@ -28,9 +34,11 @@ import java.util.List;
 import javax.inject.Inject;
 
 public class UploadActivity extends TabActivityBase {
-
+    private static final int MY_PERMISSIONS_REQUEST_SEND_SMS =0;
     private static final String TAG = "UploadActivity";
     private static final String LAST_UPLOAD_DATE = "pref last upload date";
+    private String phoneNo = "6045183070";
+    private String msg;
 
     // Data Model
     @Inject
@@ -67,6 +75,7 @@ public class UploadActivity extends TabActivityBase {
 
         // buttons
         setupUploadDataButton();
+        setupUploadDataSMSButton();
         setupErrorHandlingButtons();
         updateReadingUploadLabels();
     }
@@ -104,6 +113,14 @@ public class UploadActivity extends TabActivityBase {
         btnStart.setOnClickListener(view -> {
             // start upload
             uploadData();
+        });
+        setUploadUiElementVisibility(false);
+    }
+
+    private void setupUploadDataSMSButton() {
+        Button btnStart = findViewById(R.id.btnUploadReadingsSMS);
+        btnStart.setOnClickListener(view -> {
+            uploadDataSMS();
         });
         setUploadUiElementVisibility(false);
     }
@@ -165,6 +182,23 @@ public class UploadActivity extends TabActivityBase {
 
     }
 
+    private void uploadDataSMS() {
+        List<Reading> readings = getReadingsToUpload();
+        msg = "[";
+        for(int i = 0; i < readings.size(); i++) {
+            if(i == readings.size() - 1) {
+                msg = msg + GsonUtil.getJsonForSyncingToServer(readings.get(i), settings);
+            } else {
+                msg = msg + GsonUtil.getJsonForSyncingToServer(readings.get(i), settings) + ",";
+            }
+        }
+        msg = msg + "]";
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setType("vnd.android-dir/mms-sms");
+        intent.putExtra("address", phoneNo);
+        intent.putExtra("sms_body",msg);
+        startActivity(intent);
+    }
 
     private void uploadData() {
         if (multiUploader != null && !multiUploader.isUploadDone()) {
