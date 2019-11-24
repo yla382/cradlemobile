@@ -89,7 +89,8 @@ public class PatientsActivity extends TabActivityBase {
 
     private void getPatientsFromServer() {
         RequestQueue mRequestQueue;
-        String url = "http://192.168.19.1:8080/android/patients";
+        //String url = "http://192.168.19.1:8080/android/patients";
+        String url = "http://cmpt373.csil.sfu.ca:8081/android/patients";
         String TAG = PatientsActivity.class.getName();
 
         mRequestQueue = Volley.newRequestQueue(this);

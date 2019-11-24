@@ -34,6 +34,16 @@
 
             <include layout="@layout/content_help" />
 
+            <Button
+                android:id="@+id/pdfButton"
+                android:layout_width="125dp"
+                android:layout_height="64dp"
+                android:layout_marginTop="400dp"
+                android:layout_gravity="center"
+                android:insetTop="5dp"
+                android:text="First Aid" />
+
+
         </android.support.design.widget.CoordinatorLayout>
 
         <!-- Bottom Bar Navigation -->
