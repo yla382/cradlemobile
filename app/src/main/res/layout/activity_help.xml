@@ -51,9 +51,9 @@
 
                 <Button
                     android:id="@+id/MapButton"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="64dp"
-                    android:text="Find Health Center"
+                    android:text="Find Health Worker"
                     app:backgroundTint="#2196F3" />
 
             </LinearLayout>

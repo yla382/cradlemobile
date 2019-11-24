@@ -33,16 +33,15 @@ public class HelpActivity extends TabActivityBase {
         setupBottomBarNavigation();
         setupHelpVideo();
         openPDF();
-        openMap();
+        openWebMap();
     }
 
-    public void openMap() {
-        Button mapButton = (Button) findViewById(R.id.MapButton);
-        mapButton.setOnClickListener(new View.OnClickListener() {
+    public void openWebMap() {
+        Button webMapButton = (Button) findViewById(R.id.MapButton);
+        webMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), FindHealthCenter.class);
-                startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), FindHealthCenterWebView.class);
             }
         });
     }

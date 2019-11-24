@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cradletrial.cradlevhtapp">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality.
     -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-    <!-- Use "old" Camera API for support for devices running < v5.0. -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- Use "old" Camera API for support for devices running < v5.0. -->
     <uses-permission android:name="android.permission.CAMERA" /> <!-- Removed autofocus because preventing install on some older phones. -->
     <uses-feature android:name="android.hardware.camera" />
 
@@ -26,7 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
+        <activity android:name=".view.FindHealthCenterWebView"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -41,7 +38,7 @@
 
         <activity
             android:name=".view.FindHealthCenter"
-            android:label="@string/title_activity_find_health_center"></activity>
+            android:label="@string/title_activity_find_health_center" />
         <activity
             android:name=".view.IntroActivity"
             android:label="@string/app_name"
