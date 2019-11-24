@@ -25,6 +25,7 @@ import com.cradletrial.cradlevhtapp.model.Patient;
 import com.cradletrial.cradlevhtapp.model.Reading;
 import com.cradletrial.cradlevhtapp.model.ReadingAnalysis;
 import com.cradletrial.cradlevhtapp.model.ReadingManager;
+import com.cradletrial.cradlevhtapp.model.ReadingManagerAsDB;
 import com.cradletrial.cradlevhtapp.model.ReadingRetestAnalysis;
 import com.cradletrial.cradlevhtapp.model.WebReading;
 import com.cradletrial.cradlevhtapp.utilitiles.DateUtil;
@@ -48,7 +49,7 @@ public class PatientsInfoActivity extends AppCompatActivity{
     final List<Reading> readings = new ArrayList<>();
     Patient patient;
     @Inject
-    ReadingManager readingManager;
+    ReadingManagerAsDB readingManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,8 +110,8 @@ public class PatientsInfoActivity extends AppCompatActivity{
         }
 
         else {
-            ReadingAnalysis analysis = retestAnalysis.getMostRecentReadingAnalysis();
-            message = analysis.getBriefAdviceText(context);
+            //ReadingAnalysis analysis = retestAnalysis.getMostRecentReadingAnalysis();
+            //message = analysis.getBriefAdviceText(context);
         }
         TextView txt_Advice = (TextView) findViewById(R.id.txt_Advice);
         txt_Advice.setText(message);
@@ -219,7 +220,8 @@ public class PatientsInfoActivity extends AppCompatActivity{
 
     private void getReadingsFromServer(Integer patientID) {
         RequestQueue mRequestQueue;
-        String url = "http://192.168.19.1:8080/android/reading/findByPatientID/";
+        //String url = "http://192.168.19.1:8080/android/reading/findByPatientID/";
+        String url = "http://cmpt373.csil.sfu.ca:8081/android/reading/findByPatientID/";
         String TAG = PatientsActivity.class.getName();
 
         mRequestQueue = Volley.newRequestQueue(this);

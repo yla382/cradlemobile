@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
@@ -30,6 +32,30 @@ public class HelpActivity extends TabActivityBase {
         // setup UI components
         setupBottomBarNavigation();
         setupHelpVideo();
+        openPDF();
+        openWebMap();
+    }
+
+    public void openWebMap() {
+        Button webMapButton = (Button) findViewById(R.id.MapButton);
+        webMapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), FindHealthCenterWebView.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void openPDF() {
+        Button pdfButton = (Button) findViewById(R.id.pdfButton);
+        pdfButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), PdfActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setupHelpVideo() {
