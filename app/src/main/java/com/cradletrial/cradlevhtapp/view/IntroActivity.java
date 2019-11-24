@@ -142,13 +142,13 @@ public class IntroActivity
         long verCode = BuildConfig.VERSION_CODE;
         sharedPreferences.edit().putLong(LAST_VERSION_TO_COMPLETE_WIZARD, verCode).apply();
 
-        Intent intent = LoginActivity.makeIntent(IntroActivity.this);
-        startActivity(intent);
-        finish();
-
-//        Intent intent = ReadingsListActivity.makeIntent(IntroActivity.this);
+//        Intent intent = LoginActivity.makeIntent(IntroActivity.this);
 //        startActivity(intent);
 //        finish();
+
+        Intent intent = ReadingsListActivity.makeIntent(IntroActivity.this);
+        startActivity(intent);
+        finish();
     }
 
     private void onClickPrevious(View v) {

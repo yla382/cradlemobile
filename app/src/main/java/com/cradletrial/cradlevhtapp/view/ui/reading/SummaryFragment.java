@@ -17,6 +17,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatButton;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,10 @@ import com.cradletrial.cradlevhtapp.R;
 import com.cradletrial.cradlevhtapp.model.GestationalAgeUnit;
 import com.cradletrial.cradlevhtapp.model.Reading;
 import com.cradletrial.cradlevhtapp.model.ReadingAnalysis;
+import com.cradletrial.cradlevhtapp.model.ReadingManager;
+import com.cradletrial.cradlevhtapp.model.ReadingManagerAsDB;
 import com.cradletrial.cradlevhtapp.model.ReadingRetestAnalysis;
+import com.cradletrial.cradlevhtapp.model.Referral;
 import com.cradletrial.cradlevhtapp.utilitiles.DateUtil;
 import com.cradletrial.cradlevhtapp.utilitiles.Util;
 import com.cradletrial.cradlevhtapp.viewmodel.ReadingAnalysisViewSupport;
@@ -401,7 +405,13 @@ public class SummaryFragment extends BaseFragment {
 
     private void updateUI_Referral(ReadingRetestAnalysis retestAnalysis) {
         Button btn = getView().findViewById(R.id.btnSendReferral);
-        btn.setOnClickListener(view -> showReferralDialog());
+        btn.setOnClickListener(view -> {
+            showReferralDialog();
+            Reading reading = this.currentReading;
+
+            Referral referral = new Referral(reading);
+
+        });
 
         ImageView ivReferralSent = getView().findViewById(R.id.ivReferralSent);
         TextView tv = getView().findViewById(R.id.txtReferralSent);
