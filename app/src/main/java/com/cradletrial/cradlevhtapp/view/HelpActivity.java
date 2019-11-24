@@ -42,6 +42,7 @@ public class HelpActivity extends TabActivityBase {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), FindHealthCenterWebView.class);
+                startActivity(intent);
             }
         });
     }
