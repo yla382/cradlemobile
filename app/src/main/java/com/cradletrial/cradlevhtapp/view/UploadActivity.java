@@ -122,6 +122,7 @@ public class UploadActivity extends TabActivityBase {
         Button btnStart = findViewById(R.id.btnUploadReadingsSMS);
         btnStart.setOnClickListener(view -> {
             uploadDataSMS();
+            //btnStart.setVisibility(View.INVISIBLE);
         });
         setUploadUiElementVisibility(false);
     }
@@ -185,6 +186,10 @@ public class UploadActivity extends TabActivityBase {
 
     private void uploadDataSMS() {
         List<Reading> readings = getReadingsToUpload();
+        if (readings.size() == 0) {
+            Toast.makeText(this, "No readings needing to be uploaded.", Toast.LENGTH_LONG).show();
+            return;
+        }
 
         msg = "[";
         for(int i = 0; i < readings.size(); i++) {
@@ -194,6 +199,10 @@ public class UploadActivity extends TabActivityBase {
                 msg = msg + GsonUtil.getJsonForSyncingToServer(readings.get(i), settings) + ",";
             }
         }
+
+        multiUploader = new MultiReadingUploader(this, settings, getProgressCallbackListener());
+        multiUploader.startUploadSMS(readings);
+
         msg = msg + "]";
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setType("vnd.android-dir/mms-sms");
@@ -201,8 +210,6 @@ public class UploadActivity extends TabActivityBase {
         intent.putExtra("sms_body",msg);
 
         startActivity(intent);
-        multiUploader = new MultiReadingUploader(this, settings, getProgressCallbackListener());
-        multiUploader.startUploadSMS(readings);
         setUploadUiElementVisibility(true);
     }
 
@@ -274,7 +281,7 @@ public class UploadActivity extends TabActivityBase {
                     ImageView iv = findViewById(R.id.ivUploadAction);
                     iv.setImageResource(R.drawable.arrow_right_with_check);
 
-                    Toast.makeText(UploadActivity.this, "Done uploading readings!", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(UploadActivity.this, "Done uploading readings!", Toast.LENGTH_LONG).show();
                 } else {
                     TextView tv = UploadActivity.this.findViewById(R.id.tvUploadMessage);
                     tv.setText("Uploading reading " + (numCompleted + 1) + " of " + numTotal + "...");

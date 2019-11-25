@@ -67,9 +67,14 @@ public class MultiReadingUploader {
     }
 
     public void startUploadSMS(List<Reading> readings) {
-        Util.ensure(readings != null && readings.size() > 0);
-        this.readings = readings;
-        progressCallback.uploadProgress(getTotalNumReadings(), getTotalNumReadings());
+        if (state != State.IDLE) {
+            Log.e(TAG, "ERROR: Not in idle state");
+        } else {
+            Util.ensure(readings != null && readings.size() > 0);
+            this.readings = readings;
+            startUploadOfPendingReadingSMS();
+            progressCallback.uploadProgress(numCompleted, getTotalNumReadings());
+        }
     }
 
     public void abortUpload() {
@@ -153,7 +158,11 @@ public class MultiReadingUploader {
         return Zipper.zip(filesToZip, zipFile);
     }
 
-
+    private void startUploadOfPendingReadingSMS() {
+        Util.ensure(readings.size() > 0);
+        state = State.UPLOADING;
+        getSuccessCallbackSMS();
+    }
 
     // INTERNAL STATE MACHINE OPERATIONS
     private void startUploadOfPendingReading() {
@@ -190,6 +199,25 @@ public class MultiReadingUploader {
         }
 
     }
+
+    private void getSuccessCallbackSMS() {
+        if (state == State.DONE) {
+            return;
+        }
+        Util.ensure(readings.size() > 0);
+        progressCallback.uploadReadingSucceeded(readings.get(0));
+        readings.remove(0);
+        numCompleted++;
+        progressCallback.uploadProgress(numCompleted, getTotalNumReadings());
+
+        // advance to next reading
+        if (readings.size() > 0) {
+            startUploadOfPendingReadingSMS();
+        } else {
+            state = State.DONE;
+        }
+    }
+
     private Response.Listener<NetworkResponse> getSuccessCallback() {
         return response -> {
             // handle aborted upload:
