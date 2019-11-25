@@ -155,10 +155,12 @@ public class UploadActivity extends TabActivityBase {
 
     private void setUploadUiElementVisibility(boolean doingUpload) {
         Button btnStartUploading = findViewById(R.id.btnUploadReadings);
+        Button btnStartUploadingSMS = findViewById(R.id.btnUploadReadingsSMS);
         Button btnAbort = findViewById(R.id.btnStopUpload);
         View groupUploading = findViewById(R.id.layoutUploadingReadings);
 
         btnStartUploading.setVisibility(doingUpload ? View.INVISIBLE: View.VISIBLE);
+        btnStartUploadingSMS.setVisibility(doingUpload ? View.INVISIBLE: View.VISIBLE);
         groupUploading.setVisibility(doingUpload ? View.VISIBLE : View.GONE);
         btnAbort.setVisibility(View.VISIBLE);
         if (!doingUpload) {
@@ -276,6 +278,8 @@ public class UploadActivity extends TabActivityBase {
                     btnAbort.setVisibility(View.GONE);
                     Button btnStart = findViewById(R.id.btnUploadReadings);
                     btnStart.setVisibility(View.VISIBLE);
+                    Button btnStartSMS = findViewById(R.id.btnUploadReadingsSMS);
+                    btnStartSMS.setVisibility(View.VISIBLE);
 
                     // upload icon
                     ImageView iv = findViewById(R.id.ivUploadAction);
