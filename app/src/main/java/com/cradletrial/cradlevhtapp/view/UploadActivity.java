@@ -38,6 +38,7 @@ public class UploadActivity extends TabActivityBase {
     private static final String TAG = "UploadActivity";
     private static final String LAST_UPLOAD_DATE = "pref last upload date";
     private String phoneNo = "6045183070";
+    //private String phoneNo = "+12078020179";
     private String msg;
 
     // Data Model
@@ -184,6 +185,7 @@ public class UploadActivity extends TabActivityBase {
 
     private void uploadDataSMS() {
         List<Reading> readings = getReadingsToUpload();
+
         msg = "[";
         for(int i = 0; i < readings.size(); i++) {
             if(i == readings.size() - 1) {
@@ -197,7 +199,11 @@ public class UploadActivity extends TabActivityBase {
         intent.setType("vnd.android-dir/mms-sms");
         intent.putExtra("address", phoneNo);
         intent.putExtra("sms_body",msg);
+
         startActivity(intent);
+        multiUploader = new MultiReadingUploader(this, settings, getProgressCallbackListener());
+        multiUploader.startUploadSMS(readings);
+        setUploadUiElementVisibility(true);
     }
 
     private void uploadData() {

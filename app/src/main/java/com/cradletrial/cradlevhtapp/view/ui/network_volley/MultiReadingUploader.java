@@ -65,6 +65,13 @@ public class MultiReadingUploader {
             progressCallback.uploadProgress(numCompleted, getTotalNumReadings());
         }
     }
+
+    public void startUploadSMS(List<Reading> readings) {
+        Util.ensure(readings != null && readings.size() > 0);
+        this.readings = readings;
+        progressCallback.uploadProgress(getTotalNumReadings(), getTotalNumReadings());
+    }
+
     public void abortUpload() {
         state = State.DONE;
         readings.clear();
