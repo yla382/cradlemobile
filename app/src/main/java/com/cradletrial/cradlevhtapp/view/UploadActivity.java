@@ -37,8 +37,8 @@ public class UploadActivity extends TabActivityBase {
     private static final int MY_PERMISSIONS_REQUEST_SEND_SMS =0;
     private static final String TAG = "UploadActivity";
     private static final String LAST_UPLOAD_DATE = "pref last upload date";
-    private String phoneNo = "6045183070";
-    //private String phoneNo = "+12078020179";
+    //private String phoneNo = "6045183070";
+    private String phoneNo = "+12078020179";
     private String msg;
 
     // Data Model
