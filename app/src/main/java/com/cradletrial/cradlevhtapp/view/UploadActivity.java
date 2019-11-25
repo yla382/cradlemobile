@@ -1,10 +1,15 @@
 package com.cradletrial.cradlevhtapp.view;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,6 +22,7 @@ import com.cradletrial.cradlevhtapp.model.Reading;
 import com.cradletrial.cradlevhtapp.model.ReadingManager;
 import com.cradletrial.cradlevhtapp.model.Settings;
 import com.cradletrial.cradlevhtapp.utilitiles.DateUtil;
+import com.cradletrial.cradlevhtapp.utilitiles.GsonUtil;
 import com.cradletrial.cradlevhtapp.utilitiles.HybridFileEncrypter;
 import com.cradletrial.cradlevhtapp.view.ui.network_volley.MultiReadingUploader;
 
@@ -28,9 +34,12 @@ import java.util.List;
 import javax.inject.Inject;
 
 public class UploadActivity extends TabActivityBase {
-
+    private static final int MY_PERMISSIONS_REQUEST_SEND_SMS =0;
     private static final String TAG = "UploadActivity";
     private static final String LAST_UPLOAD_DATE = "pref last upload date";
+    //private String phoneNo = "6045183070";
+    private String phoneNo = "+12078020179";
+    private String msg;
 
     // Data Model
     @Inject
@@ -67,6 +76,7 @@ public class UploadActivity extends TabActivityBase {
 
         // buttons
         setupUploadDataButton();
+        setupUploadDataSMSButton();
         setupErrorHandlingButtons();
         updateReadingUploadLabels();
     }
@@ -108,6 +118,15 @@ public class UploadActivity extends TabActivityBase {
         setUploadUiElementVisibility(false);
     }
 
+    private void setupUploadDataSMSButton() {
+        Button btnStart = findViewById(R.id.btnUploadReadingsSMS);
+        btnStart.setOnClickListener(view -> {
+            uploadDataSMS();
+            //btnStart.setVisibility(View.INVISIBLE);
+        });
+        setUploadUiElementVisibility(false);
+    }
+
     private void setupErrorHandlingButtons() {
         setErrorUiElementsVisible(View.GONE);
         Button btnSkip = findViewById(R.id.btnSkip);
@@ -136,10 +155,12 @@ public class UploadActivity extends TabActivityBase {
 
     private void setUploadUiElementVisibility(boolean doingUpload) {
         Button btnStartUploading = findViewById(R.id.btnUploadReadings);
+        Button btnStartUploadingSMS = findViewById(R.id.btnUploadReadingsSMS);
         Button btnAbort = findViewById(R.id.btnStopUpload);
         View groupUploading = findViewById(R.id.layoutUploadingReadings);
 
         btnStartUploading.setVisibility(doingUpload ? View.INVISIBLE: View.VISIBLE);
+        btnStartUploadingSMS.setVisibility(doingUpload ? View.INVISIBLE: View.VISIBLE);
         groupUploading.setVisibility(doingUpload ? View.VISIBLE : View.GONE);
         btnAbort.setVisibility(View.VISIBLE);
         if (!doingUpload) {
@@ -165,6 +186,34 @@ public class UploadActivity extends TabActivityBase {
 
     }
 
+    private void uploadDataSMS() {
+        List<Reading> readings = getReadingsToUpload();
+        if (readings.size() == 0) {
+            Toast.makeText(this, "No readings needing to be uploaded.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        msg = "[";
+        for(int i = 0; i < readings.size(); i++) {
+            if(i == readings.size() - 1) {
+                msg = msg + GsonUtil.getJsonForSyncingToServer(readings.get(i), settings);
+            } else {
+                msg = msg + GsonUtil.getJsonForSyncingToServer(readings.get(i), settings) + ",";
+            }
+        }
+
+        multiUploader = new MultiReadingUploader(this, settings, getProgressCallbackListener());
+        multiUploader.startUploadSMS(readings);
+
+        msg = msg + "]";
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setType("vnd.android-dir/mms-sms");
+        intent.putExtra("address", phoneNo);
+        intent.putExtra("sms_body",msg);
+
+        startActivity(intent);
+        setUploadUiElementVisibility(true);
+    }
 
     private void uploadData() {
         if (multiUploader != null && !multiUploader.isUploadDone()) {
@@ -229,12 +278,14 @@ public class UploadActivity extends TabActivityBase {
                     btnAbort.setVisibility(View.GONE);
                     Button btnStart = findViewById(R.id.btnUploadReadings);
                     btnStart.setVisibility(View.VISIBLE);
+                    Button btnStartSMS = findViewById(R.id.btnUploadReadingsSMS);
+                    btnStartSMS.setVisibility(View.VISIBLE);
 
                     // upload icon
                     ImageView iv = findViewById(R.id.ivUploadAction);
                     iv.setImageResource(R.drawable.arrow_right_with_check);
 
-                    Toast.makeText(UploadActivity.this, "Done uploading readings!", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(UploadActivity.this, "Done uploading readings!", Toast.LENGTH_LONG).show();
                 } else {
                     TextView tv = UploadActivity.this.findViewById(R.id.tvUploadMessage);
                     tv.setText("Uploading reading " + (numCompleted + 1) + " of " + numTotal + "...");
